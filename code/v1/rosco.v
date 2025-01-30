@@ -8,34 +8,32 @@
 // * ROM            : $00E00000 - $00EFFFFF (1MB)
 // * IO             : $00F00000 - $FFFFFFFF (1MB)
 
-`default_nettype none
+// `default_nettype none
 
 module rosco (
-	// input  CLK, 
-	input RESETn,
+	input  CLK, 
+	input  RESETn,
 	input  [23:18] A_HIGH,
 	input  [16:6] A_MED,
 	input  [3:0] A_LOW,
-    input  IRQ2, IRQ3, IRQ5, IRQ6,
-	// input  SIZ0, SIZ1,
+    input  DUAIRQ, IRQ2, IRQ3, IRQ5, IRQ6,
+	input  SIZ0, SIZ1,
 	input  RW,
 	input  [2:0] FC,
-    // input  DSn,
+    input  DSn,
     input  ASn,
-	// input  DUAIRQn,     
 	input  HWRST,
 
 	inout  DTACKn,
 	inout  HALT,
-	// inout  BERRn,
-	
+
+	output BERRn,
 	output WR,
-	input LDSn, //HACK 
-	input UDSn, // HACK
+	output LDSn, UDSn,
 	output EXPSELn, EVENRAMSELn, ODDRAMSELn, EVENROMSELn, ODDROMSELn, 
 	output IOSELn, 
 	output DUASELn,
-	// output reg E,
+	// output E, // HACK missing reg ?
 	output reg IPL0n, 
 	output reg IPL1n, 
 	output reg IPL2n, 
@@ -43,11 +41,14 @@ module rosco (
 	output RUNLED,
 
 	output PPDTACK   // has to be an output for the tri-state logic to work
-	// output reg pberr // has to be an output for the tri-state logic to work
 );
 
 	// Reconstruct the full address bus
 	wire [23:0] A = {A_HIGH, 1'b0, A_MED, 2'b0, A_LOW};
+	// Reconstruct UDS and LDS
+	assign wireUDSn = !(!DSn && !A[0]);
+	assign wireLDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
+
 
 	// GLUE 
 	// Tri state is not well supported by yosys .. do not use these in any equations ...
@@ -85,13 +86,13 @@ module rosco (
 	// ADDRESS DECODER
 	// ROM at 0xE00000 - (0x000000 on BOOT)
 	wire rom = !boot || A[23:20] == 4'hE;
-	assign ODDROMSELn = !(cpucp_n && !ASn && !LDSn && rom);
-	assign EVENROMSELn = !(cpucp_n && !ASn && !UDSn && rom);
+	assign ODDROMSELn = !(cpucp_n && !ASn && !wireLDSn && rom);
+	assign EVENROMSELn = !(cpucp_n && !ASn && !wireUDSn && rom);
 
 	// // RAM at 0x000000 (1 MB)
 	wire ram = boot && (A[23:20] == 4'h0);
-	assign ODDRAMSELn = !(cpucp_n && !ASn && !LDSn && ram);
-	assign EVENRAMSELn = !(cpucp_n && !ASn && !UDSn && ram);
+	assign ODDRAMSELn = !(cpucp_n && !ASn && !wireLDSn && ram);
+	assign EVENRAMSELn = !(cpucp_n && !ASn && !wireUDSn && ram);
 	
 	// // IO at 0xF00000 
 	wire io = A[23:20] == 4'hF;
@@ -109,12 +110,12 @@ module rosco (
 
 
 	// DUART SELECT
-	assign DUASELn = !(A[19:6] == 0 && !LDSn && !wireIOSELn);
+	assign DUASELn = !(A[19:6] == 0 && !wireLDSn && !wireIOSELn);
 
 
 	// // CPU GLUE
-	// assign UDSn = !(!DSn && !A[0]);
-	// assign LDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
+	assign UDSn = wireUDSn;
+	assign LDSn = wireLDSn;
 
 	// set o_E
 	// according the datasheet, a single period of clock E 
@@ -139,26 +140,24 @@ module rosco (
 	// end
 
 	// assign E = trigger;
+	// assign E = 1'b0; //HACK
 
 
 	// WATCHDOG
 	// I think the original code is counting to 128 .. about 10ms on a 12MHz 68010
 	
-	// assign pberr = 1'b0;
-	// reg [6:0] wdcounter;
-	// wire wden = !ASn || (!cpucp_n && A[19]);
+	reg [6:0] wdcounter;
+	wire wden = !ASn || (!cpucp_n && A[19]);
 
-	// always @(posedge CLK) begin
-	// 	if (!wden) begin
-	// 		wdcounter <= 7'b0;
-	// 	end else if (wdcounter == 7'b1111111) begin
-	// 		pberr <= 1'b1;
-	// 	end else begin 
-	// 		wdcounter <= wdcounter + 1;
-	// 	end 
-	// end
+	always @(posedge CLK) begin
+		if (!wden) begin
+			wdcounter <= 7'b0;
+		end else if (wdcounter != 7'b1111111) begin
+			wdcounter <= wdcounter + 1;
+		end 
+	end
 
-	// assign BERRn = pberr ? 1'b0 : 1'bZ;
+	assign BERRn = (wdcounter != 7'b1111111);
 
 
 	// IRQ PRIORITY ENCODER
@@ -179,14 +178,22 @@ module rosco (
 			IPL1n = 0;
 			IPL2n = 1;
 		end
-		else begin // must be IRQ2
+		else if (DUAIRQ) begin // CHECK ME !!!!
+			IPL0n = 1;
+			IPL1n = 1;
+			IPL2n = 0;
+		end
+		else if (IRQ2) begin
 			IPL0n = 1;
 			IPL1n = 0;
 			IPL2n = 1;
 		end
+		else begin // No IRQ
+			IPL0n = 1;
+			IPL1n = 1;
+			IPL2n = 1;
+		end
 	end
-
-
 endmodule
 
 // Pin assignments for yosys flow
@@ -222,23 +229,23 @@ endmodule
 // A_LOW_2  A1 28
 // A_LOW_3  A0 29 
 // --
-//hack: RESETn      : 1
+//PIN: RESETn      : 1
 //PIN: A_MED_6     : 2
 //PIN: A_HIGH_1    : 4
-//PIN: A_MID_8    : 5
-//PIN: A_HIGH_3   : 6
+//PIN: A_MID_8     : 5
+//PIN: A_HIGH_3    : 6
 // --  GND         : 7
 //PIN: A_MID_10    : 8
 //PIN: A_HIGH_2    : 9
 //PIN: A_HIGH_5    : 10
-//PIN: A_HIGH_4     : 11
+//PIN: A_HIGH_4    : 11
 //PIN: A_MED_2     : 12
 // --  VCC         : 13
 // --  TDI         : 14
 //PIN: A_MED_4     : 15
 //PIN: A_MED_9     : 16
-//PIN: A_MED_7    : 17
-//PIN: A_HIGH_0     : 18
+//PIN: A_MED_7     : 17
+//PIN: A_HIGH_0    : 18
 // --  GND         : 19
 //PIN: A_MED_1     : 20
 //PIN: A_MED_35    : 21
@@ -259,22 +266,22 @@ endmodule
 //PIN: LDSn        : 36
 //PIN: SIZ1        : 37
 // --  VCC         : 38
-//PIN: UDSn          : 39
-//PIN: RW            : 40
+//PIN: UDSn        : 39
+//PIN: RW          : 40
 //PIN: EXPSELn     : 41
 // --  GND         : 42
 // --  VCC         : 43
 //PIN: ODDROMSELn  : 44
-//PIN: ODDRAMSELn : 45
-//PIN:  EVENROMSELn : 46 
+//PIN: ODDRAMSELn  : 45
+//PIN: EVENROMSELn : 46 
 // --  GND         : 47
 //PIN: EVENRAMSELn : 48
-// --  X   : 49
+// --  X           : 49
 //PIN: IOSELn      : 50
 //PIN: WR          : 51
 // --  X           : 52
 // --  VCC         : 53
-//PIN: DUASEL       : 54
+//PIN: DUASEL      : 54
 //PIN: DUAIRQ      : 55
 //PIN: DTACKn      : 56
 //PIN: E           : 57
@@ -288,7 +295,7 @@ endmodule
 //PIN: DUAIACKn    : 65
 // --  VCC         : 66
 //PIN: HALT        : 67
-// --  RESET       : 68
+//PIN: RESET       : 68 // HACK ?
 //PIN: RUNLED      : 69
 //PIN: BERRn       : 70
 // --  TDO         : 71

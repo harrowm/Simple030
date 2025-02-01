@@ -8,7 +8,7 @@
 // * ROM            : $00E00000 - $00EFFFFF (1MB)
 // * IO             : $00F00000 - $FFFFFFFF (1MB)
 
-// `default_nettype none
+`default_nettype none
 
 module rosco (
 	input  CLK, 
@@ -33,7 +33,7 @@ module rosco (
 	output EXPSELn, EVENRAMSELn, ODDRAMSELn, EVENROMSELn, ODDROMSELn, 
 	output IOSELn, 
 	output DUASELn,
-	// output E, // HACK missing reg ?
+	output reg E, 
 	output reg IPL0n, 
 	output reg IPL1n, 
 	output reg IPL2n, 
@@ -46,9 +46,10 @@ module rosco (
 	// Reconstruct the full address bus
 	wire [23:0] A = {A_HIGH, 1'b0, A_MED, 2'b0, A_LOW};
 	// Reconstruct UDS and LDS
-	assign wireUDSn = !(!DSn && !A[0]);
-	assign wireLDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
-
+	wire wireUDSn = !(!DSn && !A[0]);
+	wire wireLDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
+	// Set CPU space
+	wire cpucp_n = !(!HWRST && (FC[2:0] == 3'b111));
 
 	// GLUE 
 	// Tri state is not well supported by yosys .. do not use these in any equations ...
@@ -56,7 +57,6 @@ module rosco (
 	assign RESETn = HWRST ? 1'b0 : 1'bZ;
 	assign RUNLED = HWRST; 
 	
-	wire cpucp_n = !(!HWRST && (FC[2:0] == 3'b111));
 	assign DUAIACKn = !((!HWRST && (FC[2:0] == 3'b111)) && !ASn && (A[19] == 1) && (A[3:1] == 3'b100)); 
 
 	// // Count AS (memory access) cycles to set BOOT for the first 4 memory reads
@@ -117,30 +117,32 @@ module rosco (
 	assign UDSn = wireUDSn;
 	assign LDSn = wireLDSn;
 
-	// set o_E
 	// according the datasheet, a single period of clock E 
 	// consists of 10 MC68000 clock periods (six clocks low, 4 clocks high)
 	//
 	// I dont understnad that 6/4 ?? .. will just count 10 cycles ..
 
 	// reg trigger = 1'b0;
-	// reg [3:0] counter;
+	reg [3:0] counter;
 
-	// always @(posedge CLK) begin
-	// 	if (!RESETn) begin
-	// 		counter <= 4'b0;
-	// 		trigger <= 1'b0;
-	// 	end else if (counter == 10) begin
-	// 		counter <= 4'b0;
-	// 		trigger <= 1'b1;
-	// 	end else begin 
-	// 		counter <= counter + 1;
-	// 		trigger <= 1'b0;
-	// 	end 
-	// end
+	always @(posedge CLK) begin
+		// if (!RESETn) begin
+		// 	counter <= 4'b0;
+		// 	E <= 1'b0;
+		// 	// trigger <= 1'b0;
+		// end else 
+		if (counter == 10) begin
+			counter <= 4'b0;
+			E <= 1'b1;
+			// trigger <= 1'b1;
+		end else begin 
+			counter <= counter + 1;
+			E <= 1'b0;
+			// trigger <= 1'b0;
+		end 
+	end
 
 	// assign E = trigger;
-	// assign E = 1'b0; //HACK
 
 
 	// WATCHDOG
@@ -163,35 +165,35 @@ module rosco (
 	// IRQ PRIORITY ENCODER
 	always @(*) begin
 		if (IRQ6) begin
-			IPL0n = 1;
-			IPL1n = 0;
-			IPL2n = 0;
+			IPL0n <= 1;
+			IPL1n <= 0;
+			IPL2n <= 0;
 		end
 		else
 		if (IRQ5) begin
-			IPL0n = 0;
-			IPL1n = 1;
-			IPL2n = 0;
+			IPL0n <= 0;
+			IPL1n <= 1;
+			IPL2n <= 0;
 		end
 		else if (IRQ3) begin
-			IPL0n = 0;
-			IPL1n = 0;
-			IPL2n = 1;
+			IPL0n <= 0;
+			IPL1n <= 0;
+			IPL2n <= 1;
 		end
 		else if (DUAIRQ) begin // CHECK ME !!!!
-			IPL0n = 1;
-			IPL1n = 1;
-			IPL2n = 0;
+			IPL0n <= 1;
+			IPL1n <= 1;
+			IPL2n <= 0;
 		end
 		else if (IRQ2) begin
-			IPL0n = 1;
-			IPL1n = 0;
-			IPL2n = 1;
+			IPL0n <= 1;
+			IPL1n <= 0;
+			IPL2n <= 1;
 		end
 		else begin // No IRQ
-			IPL0n = 1;
-			IPL1n = 1;
-			IPL2n = 1;
+			IPL0n <= 1;
+			IPL1n <= 1;
+			IPL2n <= 1;
 		end
 	end
 endmodule

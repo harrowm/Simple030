@@ -8,6 +8,11 @@
 // * ROM            : $00E00000 - $00EFFFFF (1MB)
 // * IO             : $00F00000 - $FFFFFFFF (1MB)
 
+// TO DO 
+// Check how reset works ..
+// Check all PIN assignments in fit file are ok
+
+
 `default_nettype none
 
 module rosco (
@@ -33,7 +38,7 @@ module rosco (
 	output EXPSELn, EVENRAMSELn, ODDRAMSELn, EVENROMSELn, ODDROMSELn, 
 	output IOSELn, 
 	output DUASELn,
-	output reg E, 
+	output reg ESIG, /* This is the E signal, yosys doesnt like me calling it just 'E' */
 	output reg IPL0n, 
 	output reg IPL1n, 
 	output reg IPL2n, 
@@ -48,8 +53,8 @@ module rosco (
 	// Reconstruct UDS and LDS
 	wire wireUDSn = !(!DSn && !A[0]);
 	wire wireLDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
-	// Set CPU space
-	wire cpucp_n = !(!HWRST && (FC[2:0] == 3'b111));
+	// Set CPU space - FC all high when responding to interupt.  Note +ve logic
+	wire wireCPUSP = !HWRST && (FC[2:0] == 3'b111);
 
 	// GLUE 
 	// Tri state is not well supported by yosys .. do not use these in any equations ...
@@ -57,7 +62,7 @@ module rosco (
 	assign RESETn = HWRST ? 1'b0 : 1'bZ;
 	assign RUNLED = HWRST; 
 	
-	assign DUAIACKn = !((!HWRST && (FC[2:0] == 3'b111)) && !ASn && (A[19] == 1) && (A[3:1] == 3'b100)); 
+	assign DUAIACKn = !(!wireCPUSP && !ASn && (A[19] == 1) && (A[3:1] == 3'b100)); 
 
 	// // Count AS (memory access) cycles to set BOOT for the first 4 memory reads
 	reg [2:0] bootcounter = 0;
@@ -86,22 +91,22 @@ module rosco (
 	// ADDRESS DECODER
 	// ROM at 0xE00000 - (0x000000 on BOOT)
 	wire rom = !boot || A[23:20] == 4'hE;
-	assign ODDROMSELn = !(cpucp_n && !ASn && !wireLDSn && rom);
-	assign EVENROMSELn = !(cpucp_n && !ASn && !wireUDSn && rom);
+	assign ODDROMSELn = !(!wireCPUSP && !ASn && !wireLDSn && rom);
+	assign EVENROMSELn = !(!wireCPUSP && !ASn && !wireUDSn && rom);
 
 	// // RAM at 0x000000 (1 MB)
 	wire ram = boot && (A[23:20] == 4'h0);
-	assign ODDRAMSELn = !(cpucp_n && !ASn && !wireLDSn && ram);
-	assign EVENRAMSELn = !(cpucp_n && !ASn && !wireUDSn && ram);
+	assign ODDRAMSELn = !(!wireCPUSP && !ASn && !wireLDSn && ram);
+	assign EVENRAMSELn = !(!wireCPUSP && !ASn && !wireUDSn && ram);
 	
 	// // IO at 0xF00000 
 	wire io = A[23:20] == 4'hF;
-	wire wireIOSELn = !(cpucp_n && io); // Used below
+	wire wireIOSELn = !(!wireCPUSP && io); // Used below
 	assign IOSELn = wireIOSELn;
 
 	// // Expansion at 0x100000 - 0xD00000
 	wire exp = (A[23:20] >= 4'h1) && (A[23:20] <= 4'hD);
-	assign EXPSELn = !(cpucp_n && !ASn && exp);
+	assign EXPSELn = !(!wireCPUSP && !ASn && exp);
 	
 	assign WR = !RW;
 
@@ -119,37 +124,32 @@ module rosco (
 
 	// according the datasheet, a single period of clock E 
 	// consists of 10 MC68000 clock periods (six clocks low, 4 clocks high)
-	//
-	// I dont understnad that 6/4 ?? .. will just count 10 cycles ..
+	// E is renamed ESIG due to yosys giving wierd errors if I call the port just E
 
-	// reg trigger = 1'b0;
-	reg [3:0] counter;
-
-	always @(posedge CLK) begin
-		// if (!RESETn) begin
-		// 	counter <= 4'b0;
-		// 	E <= 1'b0;
-		// 	// trigger <= 1'b0;
-		// end else 
-		if (counter == 10) begin
-			counter <= 4'b0;
-			E <= 1'b1;
-			// trigger <= 1'b1;
-		end else begin 
-			counter <= counter + 1;
-			E <= 1'b0;
-			// trigger <= 1'b0;
-		end 
+	reg [3:0] ecounter;
+	initial begin
+		ESIG <= 1'b0;
+		ecounter <= 0;
 	end
 
-	// assign E = trigger;
+	always @(posedge CLK) begin
+		if (ecounter == 6) begin
+			ESIG <= 1'b1;
+			ecounter <= ecounter + 1;
+		end else if (ecounter == 10)begin
+			ecounter <= 0;
+			ESIG <= 1'b0;
+		end else begin 
+			ecounter <= ecounter + 1;
+		end 
+	end
 
 
 	// WATCHDOG
 	// I think the original code is counting to 128 .. about 10ms on a 12MHz 68010
 	
 	reg [6:0] wdcounter;
-	wire wden = !ASn || (!cpucp_n && A[19]);
+	wire wden = !ASn || (wireCPUSP && A[19]);
 
 	always @(posedge CLK) begin
 		if (!wden) begin
@@ -198,6 +198,8 @@ module rosco (
 	end
 endmodule
 
+// RESET IS A HACK !!!!
+
 // Pin assignments for yosys flow
 // Designed to be used with the little atf programmer for easy patching to test
 //PIN: CHIP "rosco" ASSIGNED TO A PLCC84
@@ -234,10 +236,10 @@ endmodule
 //PIN: RESETn      : 1
 //PIN: A_MED_6     : 2
 //PIN: A_HIGH_1    : 4
-//PIN: A_MID_8     : 5
+//PIN: A_MED_8     : 5
 //PIN: A_HIGH_3    : 6
 // --  GND         : 7
-//PIN: A_MID_10    : 8
+//PIN: A_MED_10    : 8
 //PIN: A_HIGH_2    : 9
 //PIN: A_HIGH_5    : 10
 //PIN: A_HIGH_4    : 11
@@ -250,7 +252,7 @@ endmodule
 //PIN: A_HIGH_0    : 18
 // --  GND         : 19
 //PIN: A_MED_1     : 20
-//PIN: A_MED_35    : 21
+//PIN: A_MED_5     : 21
 //PIN: A_MED_3     : 22
 // --  TMS         : 23
 //PIN: A_MED_0     : 24
@@ -286,7 +288,7 @@ endmodule
 //PIN: DUASEL      : 54
 //PIN: DUAIRQ      : 55
 //PIN: DTACKn      : 56
-//PIN: E           : 57
+//PIN: ESIG        : 57
 // --  X           : 58
 // --  GND         : 59
 // --  X           : 60
@@ -297,7 +299,7 @@ endmodule
 //PIN: DUAIACKn    : 65
 // --  VCC         : 66
 //PIN: HALT        : 67
-//PIN: RESET       : 68 // HACK ?
+//PIN: RESET       : 68 
 //PIN: RUNLED      : 69
 //PIN: BERRn       : 70
 // --  TDO         : 71

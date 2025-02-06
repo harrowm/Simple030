@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP DS1233-10+
+D DS1233-10+, Processor Supervisor 5V Active Low, Open Drain, Reset 3-Pin TO-92
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345030.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,0 +1,82 @@
+SamacSys ECAD Model
+870/1310672/2.50/3/3/Integrated Circuit
+
+DESIGNSPARK_INTERMEDIATE_ASCII
+
+(asciiHeader
+	(fileUnits MM)
+)
+(library Library_1
+	(padStyleDef "c151_h81"
+		(holeDiam 0.81)
+		(padShape (layerNumRef 1) (padShapeType Ellipse)  (shapeWidth 1.51) (shapeHeight 1.51))
+		(padShape (layerNumRef 16) (padShapeType Ellipse)  (shapeWidth 1.51) (shapeHeight 1.51))
+	)
+	(textStyleDef "Default"
+		(font
+			(fontType Stroke)
+			(fontFace "Helvetica")
+			(fontHeight 50 mils)
+			(strokeWidth 5 mils)
+		)
+	)
+	(patternDef "TO-92" (originalName "TO-92")
+		(multiLayer
+			(pad (padNum 1) (padStyleRef c151_h81) (pt 0, -1.8) (rotation 90))
+			(pad (padNum 2) (padStyleRef c151_h81) (pt 0, 0) (rotation 90))
+			(pad (padNum 3) (padStyleRef c151_h81) (pt 0, 1.8) (rotation 90))
+		)
+		(layerContents (layerNumRef 18)
+			(attr "RefDes" "RefDes" (pt 1.6, -0.2) (textStyleRef "Default") (isVisible True))
+		)
+		(layerContents (layerNumRef 18)
+			(arc (pt -0.028535, 0) (radius 3.000135) (startAngle 89.5) (sweepAngle 181.1) (width 0.05))
+		)
+		(layerContents (layerNumRef 18)
+			(line (pt 1.3 -2.7) (pt 0 -3) (width 0.05))
+		)
+		(layerContents (layerNumRef 18)
+			(line (pt 0 3) (pt 1.3 2.7) (width 0.05))
+		)
+		(layerContents (layerNumRef 18)
+			(line (pt 1.3 2.7) (pt 1.3 -2.7) (width 0.05))
+		)
+	)
+	(symbolDef "DS1233-10+" (originalName "DS1233-10+")
+
+		(pin (pinNum 1) (pt 0 mils -200 mils) (rotation 0) (pinLength 200 mils) (pinDisplay (dispPinName true)) (pinName (text (pt 230 mils -225 mils) (rotation 0]) (justify "Left") (textStyleRef "Default"))
+		))
+		(pin (pinNum 2) (pt 0 mils -100 mils) (rotation 0) (pinLength 200 mils) (pinDisplay (dispPinName true)) (pinName (text (pt 230 mils -125 mils) (rotation 0]) (justify "Left") (textStyleRef "Default"))
+		))
+		(pin (pinNum 3) (pt 0 mils 0 mils) (rotation 0) (pinLength 200 mils) (pinDisplay (dispPinName true)) (pinName (text (pt 230 mils -25 mils) (rotation 0]) (justify "Left") (textStyleRef "Default"))
+		))
+		(line (pt 200 mils 100 mils) (pt 700 mils 100 mils) (width 6 mils))
+		(line (pt 700 mils 100 mils) (pt 700 mils -300 mils) (width 6 mils))
+		(line (pt 700 mils -300 mils) (pt 200 mils -300 mils) (width 6 mils))
+		(line (pt 200 mils -300 mils) (pt 200 mils 100 mils) (width 6 mils))
+		(attr "RefDes" "RefDes" (pt 750 mils 300 mils) (justify Left) (isVisible True) (textStyleRef "Default"))
+
+	)
+	(compDef "DS1233-10+" (originalName "DS1233-10+") (compHeader (numPins 3) (numParts 1) (refDesPrefix IC)
+		)
+		(compPin "1" (pinName "GND") (partNum 1) (symPinNum 1) (gateEq 0) (pinEq 0) (pinType Bidirectional))
+		(compPin "2" (pinName "__RST") (partNum 1) (symPinNum 2) (gateEq 0) (pinEq 0) (pinType Bidirectional))
+		(compPin "3" (pinName "VCC") (partNum 1) (symPinNum 3) (gateEq 0) (pinEq 0) (pinType Bidirectional))
+		(attachedSymbol (partNum 1) (altType Normal) (symbolName "DS1233-10+"))
+		(attachedPattern (patternNum 1) (patternName "TO-92")
+			(numPads 3)
+			(padPinMap
+				(padNum 1) (compPinRef "1")
+				(padNum 2) (compPinRef "2")
+				(padNum 3) (compPinRef "3")
+			)
+		)
+		(attr "Mouser Part Number" "700-DS1233-10")
+		(attr "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Analog-Devices-Maxim-Integrated/DS1233-10%2b?qs=0Y9aZN%252BMVCXd7HuNF9dj5A%3D%3D")
+		(attr "Manufacturer_Name" "Analog Devices")
+		(attr "Manufacturer_Part_Number" "DS1233-10+")
+		(attr "Description" "DS1233-10+, Processor Supervisor 5V Active Low, Open Drain, Reset 3-Pin TO-92")
+		(attr "Datasheet Link" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345030.pdf")
+	)
+
+)

@@ -1,0 +1,9 @@
+Manufacturer=Analog Devices
+PartNumber=DS1233-10+
+PartCategory=Integrated Circuit
+PackageCategory=Other
+PinCount=3
+Version=2.2
+Released=2015-06-29 00:00:00
+Downloaded=2025-02-05 20:54:12
+3D=Y

@@ -1,0 +1,10 @@
+(unit MM)
+
+(package "TO-92"
+    (type UNDEF)
+    (uver 2)
+    (mountForm default
+        (footprintRef "TO-92")
+        (spec "default")
+    )
+)

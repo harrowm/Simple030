@@ -1,0 +1,16 @@
+.DS1233-10-plus- :1 ;DS1233-10+, Processor Supervisor 5V Active Low, Open Drain, Reset 3-Pin TO-92
+TO-92
+*STM IC
+*NGS
+*PLB 1="GND" 2="'RST'" 3="VCC"
+*MXP 3
+*DFN DS1233-10-plus-
+~!Mouser Part Number (700-DS1233-10)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Analog-Devices-Maxim-Integrated/DS1233-10%2b?qs=0Y9aZN%252BMVCXd7HuNF9dj5A%3D%3D)
+~!Manufacturer_Name (Analog Devices)
+~!Manufacturer_Part_Number (DS1233-10+)
+~!Link Datasheet (https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345030.pdf)
+~!Height (-)
+~!3D_Model (DS1233-10+)
+DS1233-10-plus-
+1.1!P 2.1!I 3.1!P 

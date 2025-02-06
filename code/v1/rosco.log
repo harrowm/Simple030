@@ -1,0 +1,1162 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.49 (git sha1 427b5a251bfb511528a177bfa92567b4b3ada3dd, clang++ 16.0.0 -fPIC -O3)
+
+yosys> read_liberty -lib /Users/malcolm/atf15xx_yosys/cells.lib
+
+1. Executing Liberty frontend: /Users/malcolm/atf15xx_yosys/cells.lib
+Imported 102 cell types from liberty file.
+
+yosys> read_verilog rosco.v
+
+2. Executing Verilog-2005 frontend: rosco.v
+Parsing Verilog input from `rosco.v' to AST representation.
+Warning: Yosys has only limited support for tri-state logic at the moment. (rosco.v:61)
+Warning: Yosys has only limited support for tri-state logic at the moment. (rosco.v:62)
+Warning: Yosys has only limited support for tri-state logic at the moment. (rosco.v:114)
+Generating RTLIL representation for module `\rosco'.
+Successfully finished Verilog frontend.
+
+yosys> stat
+
+3. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                168
+   Number of wire bits:            335
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              7
+   Number of cells:                104
+     $add                            4
+     $eq                            10
+     $ge                             1
+     $le                             1
+     $logic_and                     28
+     $logic_not                     47
+     $logic_or                       8
+     $mux                            3
+     $ne                             2
+
+
+yosys> tribuf
+4. Executing TRIBUF pass.
+
+yosys> stat
+
+5. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                168
+   Number of wire bits:            335
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              7
+   Number of cells:                104
+     $add                            4
+     $eq                            10
+     $ge                             1
+     $le                             1
+     $logic_and                     28
+     $logic_not                     47
+     $logic_or                       8
+     $ne                             2
+     $tribuf                         3
+
+
+yosys> synth -flatten -noabc -top rosco
+6. Executing SYNTH pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \rosco
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \rosco
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 5 switch rules as full_case in process $proc$rosco.v:166$108 in module rosco.
+Marked 1 switch rules as full_case in process $proc$rosco.v:154$103 in module rosco.
+Marked 2 switch rules as full_case in process $proc$rosco.v:135$95 in module rosco.
+Marked 1 switch rules as full_case in process $proc$rosco.v:76$29 in module rosco.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 5 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\rosco.$proc$rosco.v:0$111'.
+  Set init value: \ESIG = 1'0
+  Set init value: \ecounter = 4'0000
+Found init rule in `\rosco.$proc$rosco.v:0$110'.
+  Set init value: \bootcounter = 3'000
+  Set init value: \boot = 1'0
+Found init rule in `\rosco.$proc$rosco.v:68$109'.
+  Set init value: \bootcounter = 3'000
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~12 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\rosco.$proc$rosco.v:0$111'.
+Creating decoders for process `\rosco.$proc$rosco.v:0$110'.
+Creating decoders for process `\rosco.$proc$rosco.v:68$109'.
+Creating decoders for process `\rosco.$proc$rosco.v:166$108'.
+     1/3: $0\IPL2n[0:0]
+     2/3: $0\IPL1n[0:0]
+     3/3: $0\IPL0n[0:0]
+Creating decoders for process `\rosco.$proc$rosco.v:154$103'.
+     1/1: $0\wdcounter[6:0]
+Creating decoders for process `\rosco.$proc$rosco.v:135$95'.
+     1/2: $0\ecounter[3:0]
+     2/2: $0\ESIG[0:0]
+Creating decoders for process `\rosco.$proc$rosco.v:76$29'.
+     1/2: $0\boot[0:0]
+     2/2: $0\bootcounter[2:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\rosco.\IPL0n' from process `\rosco.$proc$rosco.v:166$108'.
+No latch inferred for signal `\rosco.\IPL1n' from process `\rosco.$proc$rosco.v:166$108'.
+No latch inferred for signal `\rosco.\IPL2n' from process `\rosco.$proc$rosco.v:166$108'.
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\rosco.\wdcounter' using process `\rosco.$proc$rosco.v:154$103'.
+  created $dff cell `$procdff$183' with positive edge clock.
+Creating register for signal `\rosco.\ESIG' using process `\rosco.$proc$rosco.v:135$95'.
+  created $dff cell `$procdff$184' with positive edge clock.
+Creating register for signal `\rosco.\ecounter' using process `\rosco.$proc$rosco.v:135$95'.
+  created $dff cell `$procdff$185' with positive edge clock.
+Creating register for signal `\rosco.\bootcounter' using process `\rosco.$proc$rosco.v:76$29'.
+  created $dff cell `$procdff$186' with positive edge clock.
+Creating register for signal `\rosco.\boot' using process `\rosco.$proc$rosco.v:76$29'.
+  created $dff cell `$procdff$187' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `rosco.$proc$rosco.v:0$111'.
+Removing empty process `rosco.$proc$rosco.v:0$110'.
+Removing empty process `rosco.$proc$rosco.v:68$109'.
+Found and cleaned up 5 empty switches in `\rosco.$proc$rosco.v:166$108'.
+Removing empty process `rosco.$proc$rosco.v:166$108'.
+Found and cleaned up 2 empty switches in `\rosco.$proc$rosco.v:154$103'.
+Removing empty process `rosco.$proc$rosco.v:154$103'.
+Found and cleaned up 2 empty switches in `\rosco.$proc$rosco.v:135$95'.
+Removing empty process `rosco.$proc$rosco.v:135$95'.
+Found and cleaned up 3 empty switches in `\rosco.$proc$rosco.v:76$29'.
+Removing empty process `rosco.$proc$rosco.v:76$29'.
+Cleaned up 12 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+<suppressed ~17 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 3 unused cells and 75 unused wires.
+<suppressed ~4 debug messages>
+
+6.6. Executing CHECK pass (checking for obvious problems).
+Checking module rosco...
+Found and reported 0 problems.
+
+6.7. Executing OPT pass (performing simple optimizations).
+
+6.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+<suppressed ~78 debug messages>
+Removed a total of 26 cells.
+
+6.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $procmux$173: \boot -> 1'1
+      Replacing known input bits on port A of cell $procmux$171: \boot -> 1'0
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+6.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 0 unused cells and 26 unused wires.
+<suppressed ~1 debug messages>
+
+6.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+6.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.7.16. Finished OPT passes. (There is nothing left to do.)
+
+6.8. Executing FSM pass (extract and optimize FSM).
+
+6.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+6.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+6.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+6.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+6.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6.9. Executing OPT pass (performing simple optimizations).
+
+6.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+6.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$187 ($dff) from module rosco (D = $procmux$173_Y, Q = \boot, rval = 1'0).
+Adding SRST signal on $procdff$186 ($dff) from module rosco (D = $procmux$178_Y, Q = \bootcounter, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$189 ($sdff) from module rosco (D = $add$rosco.v:83$31_Y, Q = \bootcounter).
+Adding SRST signal on $procdff$184 ($dff) from module rosco (D = $procmux$166_Y, Q = \ESIG, rval = 1'1).
+Adding EN signal on $auto$ff.cc:266:slice$191 ($sdff) from module rosco (D = 1'0, Q = \ESIG).
+Adding SRST signal on $procdff$183 ($dff) from module rosco (D = $procmux$154_Y, Q = \wdcounter, rval = 7'0000000).
+Adding EN signal on $auto$ff.cc:266:slice$193 ($sdff) from module rosco (D = $add$rosco.v:158$106_Y [6:0], Q = \wdcounter).
+
+6.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 7 unused cells and 7 unused wires.
+<suppressed ~8 debug messages>
+
+6.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.9.16. Finished OPT passes. (There is nothing left to do.)
+
+6.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 3) from port B of cell rosco.$add$rosco.v:83$31 ($add).
+Removed top 3 bits (of 4) from port B of cell rosco.$ge$rosco.v:108$70 ($ge).
+Removed top 1 bits (of 4) from port B of cell rosco.$eq$rosco.v:136$96 ($eq).
+Removed top 31 bits (of 32) from port B of cell rosco.$add$rosco.v:138$97 ($add).
+Removed top 28 bits (of 32) from port Y of cell rosco.$add$rosco.v:138$97 ($add).
+Removed top 31 bits (of 32) from port B of cell rosco.$add$rosco.v:158$106 ($add).
+Removed top 25 bits (of 32) from port Y of cell rosco.$add$rosco.v:158$106 ($add).
+Removed top 28 bits (of 32) from wire rosco.$add$rosco.v:138$97_Y.
+Removed top 25 bits (of 32) from wire rosco.$add$rosco.v:158$106_Y.
+
+6.11. Executing PEEPOPT pass (run peephole optimizers).
+
+6.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module rosco:
+  creating $macc model for $add$rosco.v:138$97 ($add).
+  creating $macc model for $add$rosco.v:158$106 ($add).
+  creating $macc model for $add$rosco.v:83$31 ($add).
+  creating $alu model for $macc $add$rosco.v:83$31.
+  creating $alu model for $macc $add$rosco.v:158$106.
+  creating $alu model for $macc $add$rosco.v:138$97.
+  creating $alu model for $ge$rosco.v:108$70 ($ge): new $alu
+  creating $alu model for $le$rosco.v:108$71 ($le): new $alu
+  creating $alu cell for $le$rosco.v:108$71: $auto$alumacc.cc:485:replace_alu$199
+  creating $alu cell for $ge$rosco.v:108$70: $auto$alumacc.cc:485:replace_alu$212
+  creating $alu cell for $add$rosco.v:138$97: $auto$alumacc.cc:485:replace_alu$221
+  creating $alu cell for $add$rosco.v:158$106: $auto$alumacc.cc:485:replace_alu$224
+  creating $alu cell for $add$rosco.v:83$31: $auto$alumacc.cc:485:replace_alu$227
+  created 5 $alu and 0 $macc cells.
+
+6.14. Executing SHARE pass (SAT-based resource sharing).
+
+6.15. Executing OPT pass (performing simple optimizations).
+
+6.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.15.16. Finished OPT passes. (There is nothing left to do.)
+
+6.16. Executing MEMORY pass.
+
+6.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+6.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+6.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+6.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+6.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+6.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+6.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+6.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.18. Executing OPT pass (performing simple optimizations).
+
+6.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+<suppressed ~12 debug messages>
+
+6.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 1 unused cells and 3 unused wires.
+<suppressed ~2 debug messages>
+
+6.18.5. Finished fast OPT passes.
+
+6.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6.20. Executing OPT pass (performing simple optimizations).
+
+6.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rosco..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rosco.
+Performed a total of 0 changes.
+
+6.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+Removed a total of 0 cells.
+
+6.20.6. Executing OPT_SHARE pass.
+
+6.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+
+6.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+
+6.20.10. Finished OPT passes. (There is nothing left to do.)
+
+6.21. Executing TECHMAP pass (map to technology primitives).
+
+6.21.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+6.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $tribuf.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$78e969f2586efcf3a5b0b0440bcca0db83d5cca2\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$7af24cf7f572852703f08ef7a936c59efa2c57af\_90_alu for cells of type $alu.
+Using template $paramod$103b4016182df467cceab67bcf3e18e6361ec0fd\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~677 debug messages>
+
+6.22. Executing OPT pass (performing simple optimizations).
+
+6.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rosco.
+<suppressed ~145 debug messages>
+
+6.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rosco'.
+<suppressed ~81 debug messages>
+Removed a total of 27 cells.
+
+6.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rosco..
+Removed 11 unused cells and 190 unused wires.
+<suppressed ~12 debug messages>
+
+6.22.5. Finished fast OPT passes.
+
+6.23. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `rosco'. Setting top module to rosco.
+
+6.23.1. Analyzing design hierarchy..
+Top module:  \rosco
+
+6.23.2. Analyzing design hierarchy..
+Top module:  \rosco
+Removed 0 unused modules.
+
+6.24. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                161
+   Number of wire bits:            278
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                188
+     $_AND_                         39
+     $_DFF_P_                        4
+     $_MUX_                         13
+     $_NOT_                         52
+     $_OR_                          55
+     $_SDFFE_PN0P_                   7
+     $_SDFFE_PN1N_                   1
+     $_SDFFE_PP0N_                   3
+     $_SDFF_PP0_                     1
+     $_TBUF_                         2
+     $_XOR_                         11
+
+6.25. Executing CHECK pass (checking for obvious problems).
+Checking module rosco...
+Found and reported 0 problems.
+
+yosys> stat
+
+7. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                161
+   Number of wire bits:            278
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                188
+     $_AND_                         39
+     $_DFF_P_                        4
+     $_MUX_                         13
+     $_NOT_                         52
+     $_OR_                          55
+     $_SDFFE_PN0P_                   7
+     $_SDFFE_PN1N_                   1
+     $_SDFFE_PP0N_                   3
+     $_SDFF_PP0_                     1
+     $_TBUF_                         2
+     $_XOR_                         11
+
+
+yosys> techmap -map /Users/malcolm/atf15xx_yosys/techmap.v -D skip_DFFE_XX_
+8. Executing TECHMAP pass (map to technology primitives).
+
+8.1. Executing Verilog-2005 frontend: /Users/malcolm/atf15xx_yosys/techmap.v
+Parsing Verilog input from `/Users/malcolm/atf15xx_yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Generating RTLIL representation for module `\$_DLATCH_NN0_'.
+Generating RTLIL representation for module `\$_DLATCH_NN1_'.
+Generating RTLIL representation for module `\$_DLATCH_NP0_'.
+Generating RTLIL representation for module `\$_DLATCH_NP1_'.
+Generating RTLIL representation for module `\$_DLATCH_PN0_'.
+Generating RTLIL representation for module `\$_DLATCH_PN1_'.
+Generating RTLIL representation for module `\$_DLATCH_PP0_'.
+Generating RTLIL representation for module `\$_DLATCH_PP1_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NNN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NNP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NPN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NPP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PNN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PNP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PPN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PPP_'.
+Generating RTLIL representation for module `\$_DFFE_NN0P_'.
+Generating RTLIL representation for module `\$_DFFE_PP1P_'.
+Generating RTLIL representation for module `\$_DFFSRE_PPPP_'.
+Successfully finished Verilog frontend.
+
+8.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~23 debug messages>
+
+yosys> stat
+
+9. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                161
+   Number of wire bits:            278
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                188
+     $_AND_                         39
+     $_DFF_P_                        4
+     $_MUX_                         13
+     $_NOT_                         52
+     $_OR_                          55
+     $_SDFFE_PN0P_                   7
+     $_SDFFE_PN1N_                   1
+     $_SDFFE_PP0N_                   3
+     $_SDFF_PP0_                     1
+     $_TBUF_                         2
+     $_XOR_                         11
+
+
+yosys> simplemap
+10. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+yosys> stat
+
+11. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                161
+   Number of wire bits:            278
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                188
+     $_AND_                         39
+     $_DFF_P_                        4
+     $_MUX_                         13
+     $_NOT_                         52
+     $_OR_                          55
+     $_SDFFE_PN0P_                   7
+     $_SDFFE_PN1N_                   1
+     $_SDFFE_PP0N_                   3
+     $_SDFF_PP0_                     1
+     $_TBUF_                         2
+     $_XOR_                         11
+
+
+yosys> dfflibmap -liberty /Users/malcolm/atf15xx_yosys/cells.lib
+12. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF (noninv, pins=4, area=600.00) is a direct match for cell type $_DFF_P_.
+  cell DFFAR (noninv, pins=5, area=600.00) is a direct match for cell type $_DFF_PP0_.
+  cell DFFAS (noninv, pins=5, area=600.00) is a direct match for cell type $_DFF_PP1_.
+  cell DFFARS (noninv, pins=6, area=600.00) is a direct match for cell type $_DFFSR_PPP_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF _DFF_P_ (.CLK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    unmapped dff cell: $_DFF_PN0_
+    unmapped dff cell: $_DFF_PN1_
+    \DFFAR _DFF_PP0_ (.AR( R), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+    \DFFAS _DFF_PP1_ (.AS( R), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    \DFFARS _DFFSR_PPP_ (.AR( R), .AS( S), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+
+12.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\rosco':
+  mapped 16 $_DFF_P_ cells to \DFF cells.
+
+yosys> stat
+
+13. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                214
+   Number of wire bits:            331
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                211
+     $_AND_                         39
+     $_MUX_                         36
+     $_NOT_                         52
+     $_OR_                          55
+     $_TBUF_                         2
+     $_XOR_                         11
+     DFF                            16
+
+
+yosys> abc -liberty /Users/malcolm/atf15xx_yosys/cells.lib
+14. Executing ABC pass (technology mapping using ABC).
+
+14.1. Extracting gate netlist of module `\rosco' to `<abc-temp-dir>/input.blif'..
+Extracted 193 gates and 260 wires to a netlist network with 65 inputs and 32 outputs.
+
+14.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /Users/malcolm/atf15xx_yosys/cells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Warning: Templates are not defined.
+ABC: Liberty parser cannot read "time_unit".  Assuming   time_unit : "1ns".
+ABC: Liberty parser cannot read "capacitive_load_unit". Assuming   capacitive_load_unit(1, pf).
+ABC: Scl_LibertyReadGenlib() skipped cell "bibuf" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "TRI" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFEARS".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFE".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFAR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFAS".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFARS".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Library "atf15xx" from "/Users/malcolm/atf15xx_yosys/cells.lib" has 93 cells (9 skipped: 7 seq; 0 tri-state; 2 no func; 0 dont_use).  Time =     0.00 sec
+ABC: Memory =    0.17 MB. Time =     0.00 sec
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+14.1.2. Re-integrating ABC results.
+ABC RESULTS:              AND2 cells:       10
+ABC RESULTS:            AND2I1 cells:        8
+ABC RESULTS:            AND2I2 cells:       15
+ABC RESULTS:              AND3 cells:        2
+ABC RESULTS:            AND3I1 cells:        1
+ABC RESULTS:            AND3I2 cells:        4
+ABC RESULTS:            AND3I3 cells:        4
+ABC RESULTS:              AND4 cells:        1
+ABC RESULTS:            AND4I1 cells:        1
+ABC RESULTS:            AND4I2 cells:        1
+ABC RESULTS:            AND4I4 cells:        3
+ABC RESULTS:              AND6 cells:        1
+ABC RESULTS:               INV cells:        3
+ABC RESULTS:             NAND2 cells:       11
+ABC RESULTS:           NAND2I1 cells:        3
+ABC RESULTS:           NAND2I2 cells:        7
+ABC RESULTS:             NAND3 cells:        2
+ABC RESULTS:           NAND3I1 cells:        1
+ABC RESULTS:           NAND3I2 cells:        3
+ABC RESULTS:           NAND4I3 cells:        1
+ABC RESULTS:            NOR2I1 cells:        1
+ABC RESULTS:              NOR6 cells:        1
+ABC RESULTS:             XNOR2 cells:        5
+ABC RESULTS:        internal signals:      163
+ABC RESULTS:           input signals:       65
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+
+yosys> stat
+
+15. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                368
+   Number of wire bits:            485
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                107
+     $_TBUF_                         2
+     AND2                           10
+     AND2I1                          8
+     AND2I2                         15
+     AND3                            2
+     AND3I1                          1
+     AND3I2                          4
+     AND3I3                          4
+     AND4                            1
+     AND4I1                          1
+     AND4I2                          1
+     AND4I4                          3
+     AND6                            1
+     DFF                            16
+     INV                             3
+     NAND2                          11
+     NAND2I1                         3
+     NAND2I2                         7
+     NAND3                           2
+     NAND3I1                         1
+     NAND3I2                         3
+     NAND4I3                         1
+     NOR2I1                          1
+     NOR6                            1
+     XNOR2                           5
+
+
+yosys> #hilomap -hicell VCC X -locell GND X
+
+yosys> #stat
+
+yosys> iopadmap -bits -inpad INBUF Q:A -outpad BUF A:Q -toutpad TRI ENA:A:Q -tinoutpad bibuf EN:Q:A:PAD
+16. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Mapping port rosco.DTACKn[0] using bibuf.
+Mapping port rosco.HALT[0] using bibuf.
+Mapping port rosco.ASn using INBUF.
+Mapping port rosco.A_HIGH using INBUF.
+Mapping port rosco.A_LOW using INBUF.
+Mapping port rosco.A_MED using INBUF.
+Mapping port rosco.BERRn using BUF.
+Mapping port rosco.CLK using INBUF.
+Mapping port rosco.DSn using INBUF.
+Mapping port rosco.DUAIACKn using BUF.
+Mapping port rosco.DUAIRQ using INBUF.
+Mapping port rosco.DUASELn using BUF.
+Mapping port rosco.ESIG using BUF.
+Mapping port rosco.EVENRAMSELn using BUF.
+Mapping port rosco.EVENROMSELn using BUF.
+Mapping port rosco.EXPSELn using BUF.
+Mapping port rosco.FC using INBUF.
+Mapping port rosco.HWRST using INBUF.
+Mapping port rosco.IOSELn using BUF.
+Mapping port rosco.IPL0n using BUF.
+Mapping port rosco.IPL1n using BUF.
+Mapping port rosco.IPL2n using BUF.
+Mapping port rosco.IRQ2 using INBUF.
+Mapping port rosco.IRQ3 using INBUF.
+Mapping port rosco.IRQ5 using INBUF.
+Mapping port rosco.IRQ6 using INBUF.
+Mapping port rosco.LDSn using BUF.
+Mapping port rosco.ODDRAMSELn using BUF.
+Mapping port rosco.ODDROMSELn using BUF.
+Mapping port rosco.PPDTACK using BUF.
+Mapping port rosco.RESETn using INBUF.
+Mapping port rosco.RUNLED using BUF.
+Mapping port rosco.RW using INBUF.
+Mapping port rosco.SIZ0 using INBUF.
+Mapping port rosco.SIZ1 using INBUF.
+Mapping port rosco.UDSn using BUF.
+Mapping port rosco.WR using BUF.
+
+yosys> stat
+
+17. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                405
+   Number of wire bits:            542
+   Number of public wires:          51
+   Number of public wire bits:     105
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                162
+     AND2                           10
+     AND2I1                          8
+     AND2I2                         15
+     AND3                            2
+     AND3I1                          1
+     AND3I2                          4
+     AND3I3                          4
+     AND4                            1
+     AND4I1                          1
+     AND4I2                          1
+     AND4I4                          3
+     AND6                            1
+     BUF                            18
+     DFF                            16
+     INBUF                          37
+     INV                             3
+     NAND2                          11
+     NAND2I1                         3
+     NAND2I2                         7
+     NAND3                           2
+     NAND3I1                         1
+     NAND3I2                         3
+     NAND4I3                         1
+     NOR2I1                          1
+     NOR6                            1
+     XNOR2                           5
+     bibuf                           2
+
+
+yosys> clean
+Removed 0 unused cells and 242 unused wires.
+
+yosys> stat
+
+18. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                163
+   Number of wire bits:            231
+   Number of public wires:          45
+   Number of public wire bits:      99
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                162
+     AND2                           10
+     AND2I1                          8
+     AND2I2                         15
+     AND3                            2
+     AND3I1                          1
+     AND3I2                          4
+     AND3I3                          4
+     AND4                            1
+     AND4I1                          1
+     AND4I2                          1
+     AND4I4                          3
+     AND6                            1
+     BUF                            18
+     DFF                            16
+     INBUF                          37
+     INV                             3
+     NAND2                          11
+     NAND2I1                         3
+     NAND2I2                         7
+     NAND3                           2
+     NAND3I1                         1
+     NAND3I2                         3
+     NAND4I3                         1
+     NOR2I1                          1
+     NOR6                            1
+     XNOR2                           5
+     bibuf                           2
+
+
+yosys> hierarchy
+19. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `rosco'. Setting top module to rosco.
+
+19.1. Analyzing design hierarchy..
+Top module:  \rosco
+
+19.2. Analyzing design hierarchy..
+Top module:  \rosco
+Removed 0 unused modules.
+
+yosys> stat
+
+20. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                163
+   Number of wire bits:            231
+   Number of public wires:          45
+   Number of public wire bits:      99
+   Number of ports:                 37
+   Number of port bits:             57
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                162
+     AND2                           10
+     AND2I1                          8
+     AND2I2                         15
+     AND3                            2
+     AND3I1                          1
+     AND3I2                          4
+     AND3I3                          4
+     AND4                            1
+     AND4I1                          1
+     AND4I2                          1
+     AND4I4                          3
+     AND6                            1
+     BUF                            18
+     DFF                            16
+     INBUF                          37
+     INV                             3
+     NAND2                          11
+     NAND2I1                         3
+     NAND2I2                         7
+     NAND3                           2
+     NAND3I1                         1
+     NAND3I2                         3
+     NAND4I3                         1
+     NOR2I1                          1
+     NOR6                            1
+     XNOR2                           5
+     bibuf                           2
+
+
+yosys> splitnets -format _
+21. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+yosys> rename -wire -suffix _reg t:*DFF*
+
+yosys> rename -wire -suffix _comb
+
+yosys> #write_edif -attrprop rosco.edif
+
+yosys> write_edif -lsbidx rosco.edif
+
+22. Executing EDIF backend.
+
+yosys> exit
+
+Warnings: 3 unique messages, 3 total
+End of script. Logfile hash: da3ee180e0, CPU: user 0.11s system 0.01s, MEM: 20.20 MB peak
+Yosys 0.49 (git sha1 427b5a251bfb511528a177bfa92567b4b3ada3dd, clang++ 16.0.0 -fPIC -O3)
+Time spent: 58% 1x abc (0 sec), 9% 21x opt_expr (0 sec), ...

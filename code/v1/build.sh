@@ -23,6 +23,6 @@ $SCRIPTDIR/run_fitter.sh -d ATF1508AS -p PLCC84 -s 15 $BASE -preassign keep
 # print out programmed logic
 sed -n '/^PLCC84/,/^PLCC84/{/PLCC84/!p;}' $BASE.fit
 # Program using the little atf programmer, like this ..
-# > atfu program -ed $(atfu scan -n) AddressDecoder.jed
+# > atfu program -ed $(atfu scan -n) rosco.jed
 # This can be found at:
 #  https://github.com/roscopeco/atfprog-tools

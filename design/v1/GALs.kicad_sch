@@ -5121,16 +5121,6 @@
 		)
 		(uuid "ff882908-9fd7-44f9-8b5a-8eb472b33ccd")
 	)
-	(text "A6\nA7\nA8\nA9\nA10\nA11\nA12\nA13\nA14\nA15\nA16\nA17\n-A18\n-A19\n-LDS\n-IOSEL\nDUASEL*"
-		(exclude_from_sim no)
-		(at 329.692 68.072 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "051fa143-e480-4a4a-aced-c4c684a2fcd0")
-	)
 	(text "GLUE_LOGIC.PLD"
 		(exclude_from_sim no)
 		(at 169.545 127 0)
@@ -5153,16 +5143,6 @@
 		)
 		(uuid "6a0fe218-bf82-4f46-a1ec-8eb722286bee")
 	)
-	(text "-CLK\n-AS\n-CPUSP\n-A19\nBERR*\n"
-		(exclude_from_sim no)
-		(at 329.946 105.156 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "8d632d0c-1c07-473e-8dd9-096cebf715bd")
-	)
 	(text "ADDRESS_DECODER.PLD"
 		(exclude_from_sim no)
 		(at 52.07 127 0)
@@ -5174,16 +5154,6 @@
 		)
 		(uuid "90337a8b-a8c5-48e1-ad0f-b0e67716fe3c")
 	)
-	(text "IRQ2\nIRQ3\nDUAIRQ\nIRQ5\nIRQ6\nIPL0*\nIPL1*\nIPL2*"
-		(exclude_from_sim no)
-		(at 312.674 33.02 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "90f65aaf-81e2-48c9-8d79-7bb65f32e25d")
-	)
 	(text "DUART_SEL.PLD"
 		(exclude_from_sim no)
 		(at 113.03 127 0)
@@ -5194,36 +5164,6 @@
 			(justify left bottom)
 		)
 		(uuid "95aed042-4cef-4360-9184-83bbe2dcfbaa")
-	)
-	(text "-AS\nHWRST\nFC2\nFC1\nFC0\nA1\nA2\nA3\n-A19\nDUAACK*\n-CPUSP*\n-BOOT*\nRUNLED*\nRESET*\nHALT*"
-		(exclude_from_sim no)
-		(at 310.896 115.316 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "a5d02965-b989-47d7-81ac-ff379207fc52")
-	)
-	(text "CLK\nDS\nSIZ0\nSIZ1\nA0\n-AS\nE*\nLDS*\nUDS*"
-		(exclude_from_sim no)
-		(at 323.85 33.782 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "c98d7694-a754-42af-90ca-ceacfd5ff320")
-	)
-	(text "A18\nA19\nA20\nA21\nA22\nA23\n-UDS\n-LDS\n-BOOT\n-LGEXP\nRW\nWR*\nDTACK*\n-CPUSP\nEXPSEL*\nIOSEL*\nODDROMSEL*\nEVENROMSEL*\nODDRAMSEL*\nEVENRAMSEL*\nAS"
-		(exclude_from_sim no)
-		(at 309.626 68.834 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "f194c39e-aed9-4d2c-be0a-d07f5a9c5210")
 	)
 	(text "WATCHDOG.PLD"
 		(exclude_from_sim no)
@@ -6321,27 +6261,6 @@
 			)
 		)
 	)
-	(global_label "RUNLED"
-		(shape output)
-		(at -27.94 41.91 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "516a857e-d58b-40c9-bdbe-54ceffd55ef9")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at -217.17 -59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "DS"
 		(shape input)
 		(at 166.37 26.67 180)
@@ -6683,27 +6602,6 @@
 			)
 		)
 	)
-	(global_label "RESET"
-		(shape tri_state)
-		(at -27.94 44.45 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6f60724f-2f69-48b6-8788-891e90871f1d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at -217.17 -59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "IPL0"
 		(shape output)
 		(at -27.94 16.51 0)
@@ -7024,27 +6922,6 @@
 			)
 		)
 	)
-	(global_label "HALT"
-		(shape tri_state)
-		(at -27.94 46.99 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "88578591-881e-442a-b9f1-0ed63c6ba8eb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at -217.17 -59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "A15"
 		(shape input)
 		(at -68.58 41.91 180)
@@ -7100,27 +6977,6 @@
 		(uuid "8e1983d7-818b-423d-95d2-7f219e4f6ba3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "HWRST"
-		(shape input)
-		(at -27.94 26.67 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "8f2048ce-59cb-4dc1-9ac4-8c8fb4650873")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 135.89 -64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)

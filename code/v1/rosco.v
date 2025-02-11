@@ -27,10 +27,8 @@ module rosco (
 	input  [2:0] FC,
     input  DSn,
     input  ASn,
-	input  HWRST,
 
 	inout  DTACKn,
-	inout  HALT,
 
 	output BERRn,
 	output WR,
@@ -43,7 +41,6 @@ module rosco (
 	output reg IPL1n, 
 	output reg IPL2n, 
 	output DUAIACKn,
-	output RUNLED,
 
 	output PPDTACK   // has to be an output for the tri-state logic to work
 );
@@ -54,14 +51,10 @@ module rosco (
 	wire wireUDSn = !(!DSn && !A[0]);
 	wire wireLDSn = !((!DSn && !A[0]) || (!DSn && !SIZ0) || (!DSn && SIZ1));
 	// Set CPU space - FC all high when responding to interupt.  Note +ve logic
-	wire wireCPUSP = !HWRST && (FC[2:0] == 3'b111);
+	wire wireCPUSP = (FC[2:0] == 3'b111);
 
-	// GLUE 
-	// Tri state is not well supported by yosys .. do not use these in any equations ...
-	assign HALT = HWRST ? 1'b0 : 1'bZ;
-	assign RESETn = HWRST ? 1'b0 : 1'bZ;
-	assign RUNLED = HWRST; 
-	
+
+	// GLUE 	
 	assign DUAIACKn = !(!wireCPUSP && !ASn && (A[19] == 1) && (A[3:1] == 3'b100)); 
 
 	// // Count AS (memory access) cycles to set BOOT for the first 4 memory reads
@@ -74,16 +67,10 @@ module rosco (
 	end
 	
 	always @(posedge ASn) begin
-		if (HWRST) begin // should really check halt and reset, but tri state not well handled
-			bootcounter <= 0;
-			boot <= 1'b0;
-		end
-		else begin
-			if (!boot) begin
-				bootcounter <= bootcounter + 3'b1;
-				if (bootcounter == 4) 
-					boot <= 1'b1;
-			end
+		if (!boot) begin
+			bootcounter <= bootcounter + 3'b1;
+			if (bootcounter == 4) 
+				boot <= 1'b1;
 		end
 	end
 
@@ -298,16 +285,16 @@ endmodule
 // --  X           : 64
 //PIN: DUAIACKn    : 65
 // --  VCC         : 66
-//PIN: HALT        : 67
-//PIN: RESET       : 68 
-//PIN: RUNLED      : 69
+// --: HALT        : 67
+// --: RESET       : 68 
+// --: RUNLED      : 69
 //PIN: BERRn       : 70
 // --  TDO         : 71
 // --  GND         : 72
 //PIN: FC_0        : 73
 //PIN: FC_1        : 74
 //PIN: FC_2        : 75
-//PIN: HWRST       : 76
+// --: HWRST       : 76
 //PIN: ASn         : 77
 // --  VCC         : 78
 //PIN: IPL2        : 79

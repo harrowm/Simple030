@@ -1077,6 +1077,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "e3511b23-547f-4a17-ae10-0fda32c87d10")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5_or_3.5-3"
 		(layer "F.Cu")
@@ -1407,6 +1418,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "57b74473-0d7a-4e9d-bdf2-8845baddbd83")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -1426,7 +1448,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at -3.556 -2.032 -90)
+			(at -3.556 -2.032 90)
 			(layer "F.Fab")
 			(uuid "05d058c9-3965-4616-91b1-169b6ba08c8f")
 			(effects
@@ -1434,11 +1456,11 @@
 					(size 1.2065 1.2065)
 					(thickness 0.12065)
 				)
-				(justify right bottom)
+				(justify left top)
 			)
 		)
 		(property "Footprint" "rosco_m68k:C2.5-3"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2d6487c8-6166-4634-aa09-af4ab587b0d0")
@@ -1450,7 +1472,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7f62e303-eef7-4662-b140-83f938052af1")
@@ -1462,7 +1484,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f013d231-5dbd-4fac-8892-27e3fc0b9cbc")
@@ -1665,6 +1687,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "35b872e9-9ba6-4067-8170-cc5ef3a90b5a")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -1672,7 +1705,7 @@
 		(at 159.8 107.289 -90)
 		(descr "<B>MKS2</B>, 5 x 3 mm, grid 2.54 mm")
 		(property "Reference" "C9"
-			(at -1.1 -3.25 -90)
+			(at -1.1 -3.25 90)
 			(layer "F.SilkS")
 			(uuid "a64a7946-01ea-4f23-9561-0c74d1ee1610")
 			(effects
@@ -1680,11 +1713,11 @@
 					(size 1.2065 1.2065)
 					(thickness 0.12065)
 				)
-				(justify right bottom)
+				(justify left top)
 			)
 		)
 		(property "Value" "100nF"
-			(at -3.556 -2.032 -90)
+			(at -3.556 -2.032 90)
 			(layer "F.Fab")
 			(uuid "22cd66d1-704d-4aa6-882b-e7f9f3d416f8")
 			(effects
@@ -1692,11 +1725,11 @@
 					(size 1.2065 1.2065)
 					(thickness 0.12065)
 				)
-				(justify right bottom)
+				(justify left top)
 			)
 		)
 		(property "Footprint" "rosco_m68k:C2.5-3"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a17caed8-eef4-4861-ac3a-ebbfdeb8bd3b")
@@ -1708,7 +1741,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1c0f9ddb-59c3-4540-b463-a7c6a2286365")
@@ -1720,7 +1753,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5ba39d32-1fcd-49a3-a5a6-69deeac6b601")
@@ -1922,6 +1955,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "5dd4630a-e9e6-4e9d-a2c6-8f58feb3a43c")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
@@ -2150,6 +2194,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "b354bb77-5d22-4337-8e99-e17b41bf3142")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
 		(layer "F.Cu")
@@ -2376,6 +2431,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "f9b10542-7634-460b-9bd4-ce8fbfa306d5")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
@@ -2604,6 +2670,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "327b6e90-83b3-43e5-8d86-32805cb92217")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
 		(layer "F.Cu")
@@ -2831,6 +2908,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "19676ace-19f0-4995-ad75-03449e9792dc")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:E3,5-10"
 		(layer "F.Cu")
@@ -3038,6 +3126,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "2ec30459-7c22-4704-a5a7-6934d6d9eaf7")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D10.0mm_P3.50mm.step"
+			(offset
+				(xyz -1.75 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Package_LCC:PLCC-44_THT-Socket"
 		(layer "F.Cu")
@@ -3046,7 +3145,7 @@
 		(descr "PLCC, 44 pins, through hole")
 		(tags "plcc leaded")
 		(property "Reference" "IC4"
-			(at -2.749 6.322 180)
+			(at -2.749 6.322 0)
 			(layer "F.SilkS")
 			(uuid "e7157894-68bf-42ae-af5d-e58424828b30")
 			(effects
@@ -3068,7 +3167,7 @@
 			)
 		)
 		(property "Footprint" "Package_LCC:PLCC-44_THT-Socket"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "071ff141-3407-4e4b-aa27-c208e8824496")
@@ -3080,7 +3179,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.maxlinear.com/ds/xr68c681v210.pdf"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a8016b25-3df6-496b-a9af-f98226c33f16")
@@ -3092,7 +3191,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2293482c-d591-4a1b-80e8-7632a80e47ab")
@@ -3813,15 +3912,26 @@
 			(pintype "power_in")
 			(uuid "726b9ab9-6880-40f8-9f42-61f1992cfaca")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/Package_LCC.3dshapes/PLCC-44_THT-Socket.wrl"
+		(model "${KIPRJMOD}/PLCC-44-R.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz -1.25 -6.25 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 0 0)
+			)
+		)
+		(model "${KIPRJMOD}/ATF1502AS-7JX44.step"
+			(offset
+				(xyz -1.25 -6.5 4)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
 			)
 		)
 	)
@@ -3831,7 +3941,7 @@
 		(at 223.3 92.429 -90)
 		(descr "<b>PIN HEADER</b>")
 		(property "Reference" "JP1"
-			(at 3.124 1.432143 180)
+			(at 3.124 1.432143 360)
 			(layer "F.SilkS")
 			(uuid "1aa89803-1f13-4bd2-9876-b9fedd019ee2")
 			(effects
@@ -3839,11 +3949,11 @@
 					(size 1 1)
 					(thickness 0.15)
 				)
-				(justify left top)
+				(justify right bottom)
 			)
 		)
 		(property "Value" "Jumper"
-			(at -2.54 3.175 -90)
+			(at -2.54 3.175 90)
 			(layer "F.Fab")
 			(uuid "ddf65240-6f04-49c1-907f-f11bf9a9a928")
 			(effects
@@ -3851,11 +3961,11 @@
 					(size 1.2065 1.2065)
 					(thickness 0.09652)
 				)
-				(justify right bottom)
+				(justify left top)
 			)
 		)
 		(property "Footprint" "rosco_m68k:1X02"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dfbbacaf-a9bd-4b33-8cac-52947a6987d6")
@@ -3867,7 +3977,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "453552f5-4027-47e2-9cd0-cd2a29471f42")
@@ -3879,7 +3989,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7705e0a4-9987-4fbd-83c9-bb9d0d529d01")
@@ -4092,6 +4202,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "f1184911-1ad3-40be-b0c4-8a50cfb0e261")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Crystal:Crystal_HC49-4H_Vertical"
@@ -5431,9 +5552,20 @@
 			(pintype "power_in")
 			(uuid "6c39482b-b1f8-40d3-b69a-ced189ad6b4d")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.wrl"
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.step"
 			(offset
 				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm.step"
+			(offset
+				(xyz 0 0 4)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -6105,9 +6237,20 @@
 			(pintype "power_in")
 			(uuid "82ef5985-7228-4ee7-bae9-069940d271f8")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.wrl"
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.step"
 			(offset
 				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm.step"
+			(offset
+				(xyz 0 0 4)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -6779,7 +6922,18 @@
 			(pintype "power_in")
 			(uuid "9e0d6c15-eb04-4138-9ff8-de16f376fd00")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.wrl"
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm.step"
+			(offset
+				(xyz 0 0 4)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8015,6 +8169,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "a748e5c6-ec3e-4576-9d6c-06af28829b05")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -8272,6 +8437,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "97c00b44-608c-47a1-b46d-1e79c10328b7")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:C2.5_or_3.5-3"
@@ -8603,6 +8779,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "ad525c44-e4ea-4169-91db-be3579281295")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -8860,6 +9047,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "301d2060-ced8-41b0-8656-af526dd0e015")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:1X06"
@@ -9507,6 +9705,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "6740cd5b-0eb1-44df-ad95-81c5dce7260e")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.step"
+			(offset
+				(xyz 8.75 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 90)
+			)
+		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
 		(layer "F.Cu")
@@ -9734,6 +9943,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "ea7ffc16-6a92-4423-bac9-5259a7d5193e")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:E2,5-5"
 		(layer "F.Cu")
@@ -9960,6 +10180,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "07fa49a6-a362-4575-b89c-7000fba8a1ba")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D5.0mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:1X06"
@@ -10607,6 +10838,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "b2d71c1e-cf7a-457a-8357-35e599bad6b8")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.step"
+			(offset
+				(xyz 8.75 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 90)
+			)
+		)
 	)
 	(footprint "rosco_m68k:1X06"
 		(layer "F.Cu")
@@ -11253,6 +11495,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "4ab7c083-a6ce-4cf0-bb4c-41563061cc57")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.step"
+			(offset
+				(xyz 8.75 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 90)
+			)
+		)
 	)
 	(footprint "rosco_m68k:1X02"
 		(layer "F.Cu")
@@ -11545,6 +11798,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "2a786148-4d35-471d-a406-0209ef6eca65")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -11801,6 +12065,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "b51c78c6-107d-4f8b-9cdf-a4f7de0b8ea5")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
@@ -12059,6 +12334,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "ecf8cd97-3053-4aad-8f4f-0d812b00ff16")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:1X02"
 		(layer "F.Cu")
@@ -12066,7 +12352,7 @@
 		(at 216.564 92.429 -90)
 		(descr "<b>PIN HEADER</b>")
 		(property "Reference" "JP2"
-			(at 3.124 1.322286 180)
+			(at 3.124 1.322286 360)
 			(layer "F.SilkS")
 			(uuid "c41b17d0-11aa-4d74-b038-4a22da0beb85")
 			(effects
@@ -12074,11 +12360,11 @@
 					(size 1 1)
 					(thickness 0.15)
 				)
-				(justify left top)
+				(justify right bottom)
 			)
 		)
 		(property "Value" "Jumper"
-			(at -2.54 3.175 -90)
+			(at -2.54 3.175 90)
 			(layer "F.Fab")
 			(uuid "a06b7d69-0354-41fb-99a0-1321c8285ea3")
 			(effects
@@ -12086,11 +12372,11 @@
 					(size 1.2065 1.2065)
 					(thickness 0.09652)
 				)
-				(justify right bottom)
+				(justify left top)
 			)
 		)
 		(property "Footprint" "rosco_m68k:1X02"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "81828be5-caea-43b1-97c6-9778dc32d5fa")
@@ -12102,7 +12388,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "86faca84-3068-4079-b94a-d5e949ed6781")
@@ -12114,7 +12400,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "be146edd-d475-446d-b172-13f7b64ad17e")
@@ -12327,6 +12613,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "ca5d0ad3-8cd3-4860-aac0-e5c3ee776d27")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:0207_10"
@@ -12629,6 +12926,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "d2c5b73a-6b0b-4312-a71e-c3d9439ac2f7")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:1X02"
 		(layer "F.Cu")
@@ -12899,6 +13207,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "08eb7c4e-0956-483a-9963-ffa4aa389626")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:0207_10"
@@ -13201,6 +13520,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "5debf730-ad21-4441-9a7f-57554cc92a9a")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:LED5MM"
 		(layer "F.Cu")
@@ -13393,6 +13723,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "027b0117-456f-4cec-aee7-303fd4bcae37")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D5.0mm_Green.step"
+			(offset
+				(xyz 1.25 0 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 -180)
+			)
+		)
 	)
 	(footprint "rosco_m68k:LED5MM"
 		(layer "F.Cu")
@@ -13584,6 +13925,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "099168c8-def7-4082-9d26-a870fbc796a4")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D5.0mm.step"
+			(offset
+				(xyz 1.25 0 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 -180)
+			)
 		)
 	)
 	(footprint "rosco_m68k:0207_10"
@@ -13887,6 +14239,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "55320746-37cb-4f53-aa16-0d6d5a66690e")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:0207_10"
 		(layer "F.Cu")
@@ -14188,6 +14551,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "aa246cb3-b06b-44f1-99e2-d0e50fcfaa7a")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Package_DIP:DIP-32_W15.24mm_Socket_LongPads"
@@ -14852,9 +15226,20 @@
 			(pintype "power_in")
 			(uuid "9f5c2739-dbc2-48f0-bc3b-221746858f63")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.wrl"
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm_Socket.step"
 			(offset
 				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-32_W15.24mm.step"
+			(offset
+				(xyz 0 0 4)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -15120,6 +15505,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "411e1286-1ce2-4499-b5ec-f2bf720fcb33")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
@@ -15425,7 +15821,7 @@
 		(at 178.5854 147.01 -90)
 		(descr "<B>MKS2</B>, 5 x 3 mm, grid 2.54 mm")
 		(property "Reference" "C10"
-			(at 4.0894 1.524 180)
+			(at 4.0894 1.524 0)
 			(layer "F.SilkS")
 			(uuid "90b63e20-ff58-4870-890d-fbf2e6e7e766")
 			(effects
@@ -15433,7 +15829,7 @@
 					(size 1 1)
 					(thickness 0.12065)
 				)
-				(justify left bottom)
+				(justify right top)
 			)
 		)
 		(property "Value" "100nF"
@@ -15449,7 +15845,7 @@
 			)
 		)
 		(property "Footprint" "rosco_m68k:C2.5-3"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3861476a-1aae-4937-9bc5-0a2b777b8c72")
@@ -15461,7 +15857,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dbc815f5-e974-4a5c-b5c4-870bc7a701ee")
@@ -15473,7 +15869,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5674a2ae-3a58-45cd-bc53-aefe9935b0f3")
@@ -15675,6 +16071,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "46785151-71e4-48ee-8463-b736632cc8bb")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
@@ -15934,6 +16341,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "1464858b-aa9e-4282-af7d-7b1bf5bc6bee")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -16192,6 +16610,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "ca4478f6-8f4a-4c56-a6ca-0d911553224e")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -16449,6 +16878,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "fbdeef2a-fb41-4e02-8566-7efd2222b777")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
@@ -16962,6 +17402,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "2f739bc7-0144-4242-b07f-afbe6db7613d")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:1X02"
 		(layer "F.Cu")
@@ -17232,6 +17683,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "9895d975-32c6-4875-893e-185c69a0e029")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:B3F-10XX"
@@ -17901,6 +18363,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "64e89647-9a34-4dec-83de-84cf13e3ad65")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_Push_1TS009xxxx-xxxx-xxxx_6x6x5mm.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Package_TO_SOT_THT:TO-92"
 		(layer "F.Cu")
@@ -18390,6 +18863,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "171b567d-a101-4850-b1f1-653e9f7a8732")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D5.0mm_Green.step"
+			(offset
+				(xyz 1.25 0 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -18646,6 +19130,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "3ae2e935-4d8d-4ff7-99bc-53a893aff8b0")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:MC68030RC"
@@ -20365,6 +20860,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "e2af8921-83c4-4a95-89d7-c29a8efe5083")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/LED_THT.3dshapes/LED_D5.0mm.step"
+			(offset
+				(xyz 1.25 0 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -20621,6 +21127,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "786a3d8e-5721-4fc4-b7ed-70b758f96186")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
@@ -20879,6 +21396,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "5e96c56b-0fe3-4c40-ba08-77061fae973a")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Resistor_THT:R_Array_SIP9"
@@ -21469,6 +21997,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "bb501d6d-6a23-445d-9be3-b8a065793f8c")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Resistor_THT:R_Array_SIP9"
 		(layer "F.Cu")
@@ -22058,6 +22597,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "469b1792-04ba-45f3-b959-b5727d34f861")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Package_LCC:PLCC-84_THT-Socket"
@@ -23278,6 +23828,17 @@
 		)
 		(model "${KIPRJMOD}/EPM7128SLC84-10.step"
 			(offset
+				(xyz 0 -15 4)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+		(model "${KIPRJMOD}/PLCC-84-R.step"
+			(offset
 				(xyz 0 -15 0)
 			)
 			(scale
@@ -23920,6 +24481,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "852de525-f6c4-44e1-a838-8cf3381c4387")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Resistor_THT:R_Array_SIP9"
 		(layer "F.Cu")
@@ -24551,6 +25123,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "09d88de7-9404-4e9d-aebf-3dae5f913aba")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical"
@@ -25349,6 +25932,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "b33a2646-60a0-4efa-87c2-b0c26ec1aa29")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x01_P2.54mm_Vertical.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -25607,6 +26201,17 @@
 			(solder_mask_margin 0.1016)
 			(uuid "2051e3e1-ff66-4b0a-91ea-fc7f1be1af5f")
 		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "rosco_m68k:C2.5-3"
 		(layer "F.Cu")
@@ -25614,7 +26219,7 @@
 		(at 168.7 98.8 -90)
 		(descr "<B>MKS2</B>, 5 x 3 mm, grid 2.54 mm")
 		(property "Reference" "C7"
-			(at 4.13 1.2 180)
+			(at 4.13 1.2 0)
 			(layer "F.SilkS")
 			(uuid "179a34b8-1ee3-4aa7-a127-9cf90e5ecd54")
 			(effects
@@ -25622,7 +26227,7 @@
 					(size 1.2065 1.2065)
 					(thickness 0.12065)
 				)
-				(justify left bottom)
+				(justify right top)
 			)
 		)
 		(property "Value" "100nF"
@@ -25864,6 +26469,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "db155da3-0e31-4989-b1f3-352e3b78cce2")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W1.6mm_P2.50mm.step"
+			(offset
+				(xyz -1.25 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(footprint "rosco_m68k:0207_10"
@@ -26166,6 +26782,17 @@
 			(pintype "passive")
 			(solder_mask_margin 0.1016)
 			(uuid "104ba85e-a2b5-4f10-8dc7-0c6c733d65ef")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.step"
+			(offset
+				(xyz -5 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
 		)
 	)
 	(gr_poly

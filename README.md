@@ -5,5 +5,5 @@ The idea is to run all the glue logic from a ATF1508 and to program the logic us
 
 Status of 11th Feb 2025, in design - not built or tested.  The verilog does program ok onto a ATF1508.  
 
-![3d model of board - front](./img/front.png)
+![3d model of board - front](./img/front-new.png)
 

@@ -3941,7 +3941,7 @@
 		(at 223.3 92.429 -90)
 		(descr "<b>PIN HEADER</b>")
 		(property "Reference" "JP1"
-			(at 3.124 1.432143 360)
+			(at 3.124 1.432143 0)
 			(layer "F.SilkS")
 			(uuid "1aa89803-1f13-4bd2-9876-b9fedd019ee2")
 			(effects
@@ -12352,7 +12352,7 @@
 		(at 216.564 92.429 -90)
 		(descr "<b>PIN HEADER</b>")
 		(property "Reference" "JP2"
-			(at 3.124 1.322286 360)
+			(at 3.124 1.322286 0)
 			(layer "F.SilkS")
 			(uuid "c41b17d0-11aa-4d74-b038-4a22da0beb85")
 			(effects
@@ -20666,6 +20666,28 @@
 			(pinfunction "D8")
 			(pintype "input")
 			(uuid "d292fbf1-220f-4512-a13f-aa92ea4b9613")
+		)
+		(model "${KIPRJMOD}/pga_socket_546-87-088-13-081136.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 -180)
+			)
+		)
+		(model "${KIPRJMOD}/128-PGA_MC68030RC40C_NXP.step"
+			(offset
+				(xyz 0 0 1.5)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 180)
+			)
 		)
 	)
 	(footprint "rosco_m68k:LED5MM"
